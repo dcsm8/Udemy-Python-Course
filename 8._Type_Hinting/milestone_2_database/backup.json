@@ -1,0 +1,17 @@
+[
+    {
+        "name": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "read": 1
+    },
+    {
+        "name": "Harry Potter",
+        "author": "Rowling",
+        "read": 0
+    },
+    {
+        "name": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "read": 0
+    }
+]
