@@ -27,7 +27,7 @@ def menu():
 
 
 def print_book(book):
-    book['read'] = 'YES' if int(book['read']) else 'NO'
+    book['read'] = 'YES' if book['read'] else 'NO'
 
     print(f"""
         - Name: {book['name']}

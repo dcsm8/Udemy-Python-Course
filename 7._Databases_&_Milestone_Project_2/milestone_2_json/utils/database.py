@@ -1,3 +1,4 @@
+import json
 """
 Concerned with storing and retrieving books from a csv file
 Format of the csv file:
@@ -13,12 +14,18 @@ name,author,read
 }
 """
 
-books_file = 'books.txt'
+books_file = 'books.json'
 
 
 def add_book(name, author):
-    with open(books_file, 'a') as file:
-        file.write(f'{name},{author},0\n')
+    books = get_all_books()
+    with open(books_file, 'w') as file:
+        books.append({
+            'name': name,
+            'author': author,
+            'read': False
+        })
+        _save_all_books(books)
 
 
 def delete_book(name):
@@ -31,25 +38,16 @@ def mark_as_read_book(name):
     books = get_all_books()
     for book in books:
         if book['name'] == name:
-            book['read'] = '1'
+            book['read'] = True
 
     _save_all_books(books)
 
 
 def _save_all_books(books):
-    books = [f"{book['name']},{book['author']},{book['read']}" for book in books]
     with open(books_file, 'w') as file:
-        for book in books:
-            file.write("%s\n" % book)
+        json.dump(books, file)
 
 
 def get_all_books():
     with open(books_file, 'r') as file:
-        lines = [line.strip().split(',') for line in file.readlines()]
-
-    books = [
-        {'name': line[0], 'author': line[1], 'read': line[2]}
-        for line in lines
-    ]
-
-    return books
+        return json.load(file)
